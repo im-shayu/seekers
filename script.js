@@ -464,6 +464,26 @@ faqItems.forEach(item => {
   });
 });
 
+// Mobile menu toggle
+const navToggle = document.getElementById('navToggle');
+const navCenter = document.querySelector('.nav-center');
+
+if (navToggle && navCenter) {
+  navToggle.addEventListener('click', function() {
+    navToggle.classList.toggle('active');
+    navCenter.classList.toggle('active');
+  });
+  
+  // Close mobile menu when clicking on a link
+  const navLinks = document.querySelectorAll('.nav-menu a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      navToggle.classList.remove('active');
+      navCenter.classList.remove('active');
+    });
+  });
+}
+
 // Smooth scroll for nav links
 const navLinks = document.querySelectorAll('.nav-menu a');
 navLinks.forEach(link => {

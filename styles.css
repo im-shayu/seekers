@@ -13,6 +13,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 body {
   margin: 0;
@@ -20,6 +22,7 @@ body {
   background: var(--primary);
   color: var(--text);
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Navigation */
@@ -839,40 +842,170 @@ section {
   color: var(--accent);
 }
 
+/* Mobile Menu Toggle */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.nav-toggle .bar {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.nav-toggle.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.nav-toggle.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active .bar:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .nav-container { 
-    flex-direction: column; 
-    gap: 1rem; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 0.5rem 1rem;
+    position: relative;
   }
-  .nav-center {
+  
+  .nav-toggle {
+    display: flex;
     order: 3;
-    width: 100%;
   }
+  
+  .nav-center {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    transform: translateY(-100%);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .nav-center.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
   .nav-menu {
-    gap: 1.5rem;
-    font-size: 0.9rem;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 1rem;
   }
+  
+  .nav-menu li {
+    text-align: center;
+  }
+  
+  .nav-menu li a {
+    padding: 0.75rem 1rem;
+    display: block;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  
+  .nav-menu li a:hover {
+    background: rgba(233, 69, 96, 0.1);
+  }
+  
   .footer-content { flex-direction: column; align-items: center; }
 }
 @media (max-width: 600px) {
   .nav-container {
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 1rem;
   }
   .nav-left {
     gap: 0.8rem;
   }
-  .nav-menu { 
-    gap: 0.8rem; 
-    font-size: 0.8rem;
-  }
   .logo-image {
-    height: 32px;
+    height: 28px;
   }
   .container { padding: 0 1rem; }
-  .section-header h2 { font-size: 2rem; }
-  .hero-title { font-size: 2rem; }
+  .section-header h2 { font-size: 1.5rem; }
+  .hero-title { font-size: 1.5rem; }
+  
+  /* Fix hero logo overlay for mobile */
+  .hero-logo-overlay {
+    width: 90vw;
+    max-width: 400px;
+  }
+  
+  /* Fix hero tagline for mobile */
+  .hero-tagline {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0 1rem;
+  }
+  
+  /* Fix popup for mobile */
+  .popup-box {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-width: calc(100vw - 2rem);
+  }
+  
+  /* Fix email popup form for mobile */
+  #popupEmailForm {
+    flex-direction: column !important;
+  }
+  
+  #popupEmailInput {
+    width: 100% !important;
+    max-width: none !important;
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
+  
+  #popupEmailForm button {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  
+  /* Prevent zoom on input focus */
+  input[type="email"], input[type="text"] {
+    font-size: 16px !important;
+  }
+  
+  /* Fix COMING SOON text size on mobile */
+  section h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* Additional mobile fixes for very small screens */
+@media (max-width: 480px) {
+  section h2 {
+    font-size: 1.5rem !important;
+  }
+  
+  .hero-logo-overlay {
+    width: 85vw;
+    max-width: 300px;
+  }
+  
+  .popup-box {
+    margin: 0.5rem;
+    padding: 1rem;
+  }
 }
 
 .hero-logo-overlay {

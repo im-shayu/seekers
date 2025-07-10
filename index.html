@@ -36,7 +36,7 @@
             <div class="nav-right">
                 <span class="mint-btn"><b>Sign-up For Alpha</b></span>
             </div>
-            <div class="nav-toggle">
+            <div class="nav-toggle" id="navToggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -110,10 +110,10 @@
         <button id="closePopup" class="popup-close">&times;</button>
         <div style="max-width: 520px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: center;">
           <h2 style="font-family: 'Calisto MT', serif; color: #fff; text-align: center; margin-top: 0; margin-bottom: 0.5rem; font-size: 2rem; font-weight: 700; text-shadow: 0 0 3px #fff, 0 0 8px #e0e0e0;">Become a Seeker</h2>
-          <div id="signupPromo" style="font-style: italic; font-size: 0.85rem; color: #e7e5f3; text-align: center; margin-bottom: 1.1rem; font-family: 'Calisto MT', serif; white-space: nowrap;">Be one of the first 1,000 sign-ups and receive a limited-edition serialized card from the base set.</div>
-          <form id="popupEmailForm" style="display: flex; flex-direction: row; align-items: center; gap: 0.5rem; width: 100%; justify-content: center; margin-bottom: 1.1rem;">
-            <input type="email" id="popupEmailInput" name="email" placeholder="Enter your email" required style="padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid #888; width: 200px; font-size: 1rem; font-family: 'Calisto MT', serif; font-style: italic; background: #181818; color: #fff;">
-            <button type="submit" style="background: #7a0c1a; color: #fff; border: none; border-radius: 6px; padding: 0.5rem 1.25rem; font-size: 1rem; font-family: 'Calisto MT', serif; font-weight: bold; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center;">Sign Up</button>
+          <div id="signupPromo" style="font-style: italic; font-size: 0.85rem; color: #e7e5f3; text-align: center; margin-bottom: 1.1rem; font-family: 'Calisto MT', serif;">Be one of the first 1,000 sign-ups and receive a limited-edition serialized card from the base set.</div>
+          <form id="popupEmailForm" style="display: flex; flex-direction: column; align-items: center; gap: 0.75rem; width: 100%; justify-content: center; margin-bottom: 1.1rem;">
+            <input type="email" id="popupEmailInput" name="email" placeholder="Enter your email" required style="padding: 0.75rem; border-radius: 6px; border: 1px solid #888; width: 100%; max-width: 300px; font-size: 1rem; font-family: 'Calisto MT', serif; font-style: italic; background: #181818; color: #fff; box-sizing: border-box;">
+            <button type="submit" style="background: #7a0c1a; color: #fff; border: none; border-radius: 6px; padding: 0.75rem 2rem; font-size: 1rem; font-family: 'Calisto MT', serif; font-weight: bold; cursor: pointer; transition: background 0.2s; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px;">Sign Up</button>
           </form>
           <div id="popupSuccess" class="popup-success" style="display:none;">
             <div class="checkmark" style="margin: 0.05rem 0;">
