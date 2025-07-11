@@ -111,7 +111,7 @@ body {
 .volume-control {
   margin-right: 0;
 }
-.mint-btn {
+.signup-btn {
   margin-left: 0;
   font-family: 'Calisto MT', serif;
   display: flex;
@@ -120,7 +120,7 @@ body {
   line-height: 1.5;
   margin-top: 4px;
 }
-.mint-btn:hover {
+.signup-btn:hover {
   background: #ff5e7e;
 }
 
@@ -954,107 +954,48 @@ section {
   .footer-content { flex-direction: column; align-items: center; }
 }
 @media (max-width: 600px) {
-  .nav-container {
-    padding: 0.5rem 1rem;
-  }
-  .nav-left {
-    gap: 0.8rem;
-  }
   .logo-image {
-    height: 28px;
+    height: 18px;
+    max-width: 90vw;
   }
-  .container { padding: 0 1rem; }
-  .section-header h2 { font-size: 1.5rem; }
-  .hero-title { font-size: 1.5rem; }
-  
-  /* Fix hero logo overlay for mobile */
   .hero-logo-overlay {
-    width: 60vw;
-    max-width: 250px;
-    top: calc(50% - 40px);
-    opacity: 1;
+    width: 38vw;
+    max-width: 120px;
+    top: 18vh;
   }
-  
-  /* Fix hero tagline for mobile */
   .hero-tagline {
-    font-size: 0.8rem;
-    line-height: 1.2;
-    padding: 0 1rem;
-    top: calc(50% + 80px);
-    max-width: 85vw;
-    opacity: 1;
+    font-size: 0.75rem;
+    line-height: 1.1;
+    padding: 0 0.5rem;
+    top: 32vh;
+    max-width: 95vw;
+    text-align: center;
+    white-space: normal;
+    word-break: break-word;
   }
-  
-  /* Fix hero section for mobile */
   .hero {
-    min-height: 100vh;
-    padding-top: 60px; /* Account for fixed navbar */
+    min-height: 70vh;
+    padding-top: 56px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
   }
-  
-  /* Remove gray section by adjusting hero background */
   .hero::after {
-    height: 60px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
-  }
-  
-  /* Fix popup for mobile */
-  .popup-box {
-    margin: 1rem;
-    padding: 1.5rem;
-    max-width: calc(100vw - 2rem);
-  }
-  
-  /* Fix email popup form for mobile */
-  #popupEmailForm {
-    flex-direction: column !important;
-  }
-  
-  #popupEmailInput {
-    width: 100% !important;
-    max-width: none !important;
-    font-size: 16px !important; /* Prevents zoom on iOS */
-  }
-  
-  #popupEmailForm button {
-    width: 100% !important;
-    max-width: none !important;
-  }
-  
-  /* Prevent zoom on input focus */
-  input[type="email"], input[type="text"] {
-    font-size: 16px !important;
-  }
-  
-  /* Fix COMING SOON text size on mobile */
-  section h2 {
-    font-size: 2rem !important;
+    height: 0;
+    background: transparent;
   }
 }
 
-/* Additional mobile fixes for very small screens */
 @media (max-width: 480px) {
-  section h2 {
-    font-size: 1.5rem !important;
-  }
-  
   .hero-logo-overlay {
-    width: 55vw;
-    max-width: 200px;
-    top: calc(50% - 30px);
+    width: 32vw;
+    max-width: 90px;
+    top: 12vh;
   }
-  
   .hero-tagline {
-    font-size: 0.7rem;
-    top: calc(50% + 60px);
-    max-width: 90vw;
-  }
-  
-  .popup-box {
-    margin: 0.5rem;
-    padding: 1rem;
+    font-size: 0.65rem;
+    top: 22vh;
+    max-width: 98vw;
   }
 }
 
@@ -1183,13 +1124,13 @@ section {
   font-display: swap;
 }
 
-.nav-menu li a, .mint-btn {
+.nav-menu li a, .signup-btn {
   font-family: 'Calisto MT', serif;
   text-transform: uppercase;
 }
 
-/* Remove button-like styles from .mint-btn when used as a span in the navbar */
-.nav-container .mint-btn {
+/* Remove button-like styles from .signup-btn when used as a span in the navbar */
+.nav-container .signup-btn {
   background: none;
   color: var(--text);
   border: none;
@@ -1204,11 +1145,11 @@ section {
   transition: color 0.2s;
   display: inline;
 }
-.nav-container .mint-btn:hover {
+.nav-container .signup-btn:hover {
   color: #bc0013;
 }
 /* Only apply button styles to actual buttons */
-button.mint-btn {
+button.signup-btn {
   background: var(--accent);
   color: #fff;
   border: none;
@@ -1220,7 +1161,7 @@ button.mint-btn {
   margin-left: 2rem;
   transition: background 0.2s;
 }
-button.mint-btn:hover {
+button.signup-btn:hover {
   background: #ff5e7e;
 }
 

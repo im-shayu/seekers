@@ -145,7 +145,7 @@ if (cards.length > 0) {
 // Email Signup Popup
 const emailPopup = document.getElementById('emailPopup');
 const closePopup = document.getElementById('closePopup');
-const alphaSignup = document.querySelector('.mint-btn');
+const alphaSignup = document.querySelector('.signup-btn');
 const popupOverlay = document.getElementById('popupOverlay');
 const popupEmailForm = document.getElementById('popupEmailForm');
 const popupSuccess = document.getElementById('popupSuccess');
