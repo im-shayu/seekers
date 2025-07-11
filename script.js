@@ -523,6 +523,7 @@ if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
       bgMusic.play().catch(() => {});
       volumeIcon.classList.remove('fa-volume-mute');
       volumeIcon.classList.add('fa-volume-up');
+      volumeIcon.classList.add('active');
       hasStartedMusic = true;
       sliderVisible = false;
       volumeSlider.style.display = 'none';
@@ -549,10 +550,12 @@ if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
       bgMusic.muted = true;
       volumeIcon.classList.remove('fa-volume-up');
       volumeIcon.classList.add('fa-volume-mute');
+      volumeIcon.classList.remove('active');
     } else {
       bgMusic.muted = false;
       volumeIcon.classList.remove('fa-volume-mute');
       volumeIcon.classList.add('fa-volume-up');
+      volumeIcon.classList.add('active');
     }
   });
 } 
