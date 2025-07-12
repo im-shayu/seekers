@@ -1,4 +1,4 @@
-// Parallax effect for backgrounds
+// Scroll effects for hero section
 window.addEventListener('scroll', function() {
   const scrollY = window.scrollY;
   const heroSection = document.querySelector('.hero');
@@ -10,8 +10,8 @@ window.addEventListener('scroll', function() {
   if (logoOverlay && heroTagline && heroHeight > 0) {
     const start = 0;
     const end = heroHeight * 0.1;
-    const taglineStart = heroHeight * 0.10; // Tagline starts appearing at 10%
-    const taglineEnd = heroHeight * 0.15;   // Tagline fully visible at 15%
+    const taglineStart = heroHeight * 0.30; // Tagline starts appearing at 30%
+    const taglineEnd = heroHeight * 0.35;   // Tagline fully visible at 35%
     let progress = 0;
     let taglineProgress = 0;
     if (scrollY > start) {
@@ -25,48 +25,21 @@ window.addEventListener('scroll', function() {
     logoOverlay.style.opacity = progress;
     logoOverlay.style.transform = `translate(-50%, -50%)`;
     heroTagline.style.opacity = taglineProgress;
-    heroTagline.style.transform = `translate(-50%, -50%)`;
   }
 
-  // Only apply parallax effect within the hero section
-  if (scrollY <= heroHeight) {
-    // Show parallax images when in hero section
-    const allParallaxEls = document.querySelectorAll('.parallax-bg, .parallax-bg-overlay');
-    allParallaxEls.forEach(el => {
-      el.style.opacity = '1';
-    });
-
-    // Calculate progress: 0 until 5%, then 0 to 1 after 5%
-    let progress = 0;
-    if (heroHeight > 0) {
-      const fivePercent = heroHeight * 0.05;
-      if (scrollY > fivePercent) {
-        progress = (scrollY - fivePercent) / (heroHeight - fivePercent);
-        if (progress > 1) progress = 1;
-      }
-    }
-
-    // Base parallax layer (plax2) - slower movement
-    const parallaxEls = document.querySelectorAll('.parallax-bg');
-    parallaxEls.forEach(el => {
-      const speed = 0.3;
-      const offset = progress * scrollY * speed;
-      el.style.transform = `translateY(${offset}px)`;
-    });
+  // Scroll indicator visibility
+  const scrollIndicator = document.querySelector('.scroll-indicator');
+  if (scrollIndicator) {
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Overlay parallax layer (plax1) - faster movement
-    const parallaxOverlays = document.querySelectorAll('.parallax-bg-overlay');
-    parallaxOverlays.forEach(el => {
-      const speed = 0.6;
-      const offset = progress * scrollY * speed;
-      el.style.transform = `translateY(${offset}px)`;
-    });
-  } else {
-    // Hide parallax images when scrolled past hero section
-    const allParallaxEls = document.querySelectorAll('.parallax-bg, .parallax-bg-overlay');
-    allParallaxEls.forEach(el => {
-      el.style.opacity = '0';
-    });
+    // Hide when user is at the bottom (within 100px of bottom)
+    if (scrollTop + windowHeight >= documentHeight - 100) {
+      scrollIndicator.style.opacity = '0';
+    } else {
+      scrollIndicator.style.opacity = '1';
+    }
   }
 });
 
@@ -145,7 +118,7 @@ if (cards.length > 0) {
 // Email Signup Popup
 const emailPopup = document.getElementById('emailPopup');
 const closePopup = document.getElementById('closePopup');
-const alphaSignup = document.querySelector('.signup-btn');
+const alphaSignupButtons = document.querySelectorAll('.signup-btn');
 const popupOverlay = document.getElementById('popupOverlay');
 const popupEmailForm = document.getElementById('popupEmailForm');
 const popupSuccess = document.getElementById('popupSuccess');
@@ -184,10 +157,12 @@ setTimeout(() => {
 }, 30000);
 
 closePopup.addEventListener('click', hideEmailPopup);
-if (alphaSignup) {
-  alphaSignup.addEventListener('click', () => {
-    showEmailPopup();
-    localStorage.setItem('alphaSignupClicked', 'true');
+if (alphaSignupButtons.length > 0) {
+  alphaSignupButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      showEmailPopup();
+      localStorage.setItem('alphaSignupClicked', 'true');
+    });
   });
 }
 if (popupOverlay) {
@@ -515,8 +490,11 @@ if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
   volumeIcon.classList.remove('fa-volume-up');
   volumeIcon.classList.add('fa-volume-mute');
 
-  volumeIcon.addEventListener('click', (e) => {
+  // Handle both click and touch events for mobile compatibility
+  const handleVolumeIconInteraction = (e) => {
+    e.preventDefault();
     e.stopPropagation();
+    
     if (!hasStartedMusic) {
       // First click: unmute and play
       bgMusic.muted = false;
@@ -531,19 +509,28 @@ if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
       // Toggle slider
       sliderVisible = !sliderVisible;
       volumeSlider.style.display = sliderVisible ? 'block' : 'none';
+      volumeControl.classList.toggle('active', sliderVisible);
     }
-  });
+  };
 
-  // Hide slider when clicking outside
-  document.addEventListener('click', (e) => {
+  // Add both click and touch event listeners
+  volumeIcon.addEventListener('click', handleVolumeIconInteraction);
+  volumeIcon.addEventListener('touchstart', handleVolumeIconInteraction);
+
+  // Hide slider when clicking/touching outside
+  const handleOutsideClick = (e) => {
     if (!volumeControl.contains(e.target)) {
       sliderVisible = false;
       volumeSlider.style.display = 'none';
+      volumeControl.classList.remove('active');
     }
-  });
+  };
 
-  // Update volume and icon on slider change
-  volumeSlider.addEventListener('input', (e) => {
+  document.addEventListener('click', handleOutsideClick);
+  document.addEventListener('touchstart', handleOutsideClick);
+
+  // Update volume and icon on slider change (works for both mouse and touch)
+  const handleSliderChange = (e) => {
     const vol = parseFloat(e.target.value);
     bgMusic.volume = vol;
     if (vol === 0) {
@@ -557,5 +544,8 @@ if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
       volumeIcon.classList.add('fa-volume-up');
       volumeIcon.classList.add('active');
     }
-  });
+  };
+
+  volumeSlider.addEventListener('input', handleSliderChange);
+  volumeSlider.addEventListener('change', handleSliderChange);
 } 
