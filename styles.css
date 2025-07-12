@@ -1033,7 +1033,7 @@ section {
   }
   .hero {
     min-height: 70vh;
-    margin-top: -120px;
+    margin-top: -60px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1089,7 +1089,7 @@ section {
     width: 180px;
   }
   .hero {
-    margin-top: -120px;
+    margin-top: -60px;
   }
   .hero-bg-img, .hero-bg-img.overlay {
     opacity: 1 !important;
