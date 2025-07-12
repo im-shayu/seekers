@@ -921,7 +921,6 @@ section {
     top: 60px;
     right: -100%;
     width: 250px;
-    height: calc(100vh - 60px);
     background: rgba(0,0,0,0.95);
     backdrop-filter: blur(10px);
     transition: right 0.3s ease;
@@ -1041,6 +1040,9 @@ section {
     background-size: cover !important;
     background-position: center !important;
     opacity: 1 !important;
+  }
+  .hero-logo-overlay {
+    transition: none;
   }
   .popup-box {
     margin: 1rem;

@@ -1,5 +1,5 @@
-// Scroll effects for hero section
-window.addEventListener('scroll', function() {
+// Function to update hero elements visibility
+function updateHeroElements() {
   const scrollY = window.scrollY;
   const heroSection = document.querySelector('.hero');
   const heroHeight = heroSection ? heroSection.offsetHeight : 0;
@@ -14,19 +14,38 @@ window.addEventListener('scroll', function() {
     const taglineEnd = heroHeight * 0.35;   // Tagline fully visible at 35%
     let progress = 0;
     let taglineProgress = 0;
-    if (scrollY > start) {
-      progress = (scrollY - start) / (end - start);
-      if (progress > 1) progress = 1;
+    
+    // Check if mobile view (screen width <= 768px)
+    const isMobile = window.innerWidth <= 768;
+    
+    if (isMobile) {
+      // On mobile, show logo and tagline immediately
+      progress = 1;
+      taglineProgress = 1;
+    } else {
+      // Desktop scroll effects
+      if (scrollY > start) {
+        progress = (scrollY - start) / (end - start);
+        if (progress > 1) progress = 1;
+      }
+      if (scrollY > taglineStart) {
+        taglineProgress = (scrollY - taglineStart) / (taglineEnd - taglineStart);
+        if (taglineProgress > 1) taglineProgress = 1;
+      }
     }
-    if (scrollY > taglineStart) {
-      taglineProgress = (scrollY - taglineStart) / (taglineEnd - taglineStart);
-      if (taglineProgress > 1) taglineProgress = 1;
-    }
+    
     logoOverlay.style.opacity = progress;
-    logoOverlay.style.transform = `translate(-50%, -50%)`;
     heroTagline.style.opacity = taglineProgress;
   }
+}
 
+// Initial setup - run immediately when page loads
+updateHeroElements();
+
+// Scroll effects for hero section
+window.addEventListener('scroll', function() {
+  updateHeroElements();
+  
   // Scroll indicator visibility
   const scrollIndicator = document.querySelector('.scroll-indicator');
   if (scrollIndicator) {
