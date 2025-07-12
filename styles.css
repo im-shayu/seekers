@@ -1046,8 +1046,6 @@ section {
     background: transparent;
   }
   .hero-bg-img, .hero-bg-img.overlay {
-    background-size: cover !important;
-    background-position: center !important;
     opacity: 1 !important;
   }
   .hero-logo-overlay {
@@ -1094,8 +1092,6 @@ section {
     margin-top: -120px;
   }
   .hero-bg-img, .hero-bg-img.overlay {
-    background-size: cover !important;
-    background-position: center !important;
     opacity: 1 !important;
   }
   .popup-box {
@@ -1111,6 +1107,8 @@ section {
 @media (max-width: 320px) {
   /* All scaling handled by responsive variables */
 }
+
+
 
 .hero-logo-overlay {
   position: absolute;
