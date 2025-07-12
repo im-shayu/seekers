@@ -15,11 +15,11 @@ function updateHeroElements() {
     let progress = 0;
     let taglineProgress = 0;
     
-    // Check if mobile view (screen width <= 768px)
-    const isMobile = window.innerWidth <= 768;
+    // Check if dropdown menu is present (screen width <= 1200px)
+    const isDropdownMode = window.innerWidth <= 1200;
     
-    if (isMobile) {
-      // On mobile, show logo and tagline immediately
+    if (isDropdownMode) {
+      // When dropdown is present, show logo and tagline immediately
       progress = 1;
       taglineProgress = 1;
     } else {
