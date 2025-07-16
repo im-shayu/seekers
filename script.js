@@ -494,77 +494,34 @@ navLinks.forEach(link => {
 const bgMusic = document.getElementById('bgMusic');
 const volumeControl = document.querySelector('.volume-control');
 const volumeIcon = document.querySelector('.volume-icon');
-const volumeSlider = document.querySelector('.volume-slider');
 
 if (bgMusic) {
   bgMusic.volume = 0.5;
   bgMusic.muted = true;
 }
 
-let hasStartedMusic = false;
-let sliderVisible = false;
-
-if (volumeIcon && volumeSlider && volumeControl && bgMusic) {
+if (volumeIcon && volumeControl && bgMusic) {
   // Always start with slashed icon
   volumeIcon.classList.remove('fa-volume-up');
   volumeIcon.classList.add('fa-volume-mute');
 
-  // Handle both click and touch events for mobile compatibility
-  const handleVolumeIconInteraction = (e) => {
+  const toggleMute = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    
-    if (!hasStartedMusic) {
-      // First click: unmute and play
+    if (bgMusic.muted) {
       bgMusic.muted = false;
       bgMusic.play().catch(() => {});
       volumeIcon.classList.remove('fa-volume-mute');
       volumeIcon.classList.add('fa-volume-up');
       volumeIcon.classList.add('active');
-      hasStartedMusic = true;
-      sliderVisible = false;
-      volumeSlider.style.display = 'none';
     } else {
-      // Toggle slider
-      sliderVisible = !sliderVisible;
-      volumeSlider.style.display = sliderVisible ? 'block' : 'none';
-      volumeControl.classList.toggle('active', sliderVisible);
-    }
-  };
-
-  // Add both click and touch event listeners
-  volumeIcon.addEventListener('click', handleVolumeIconInteraction);
-  volumeIcon.addEventListener('touchstart', handleVolumeIconInteraction);
-
-  // Hide slider when clicking/touching outside
-  const handleOutsideClick = (e) => {
-    if (!volumeControl.contains(e.target)) {
-      sliderVisible = false;
-      volumeSlider.style.display = 'none';
-      volumeControl.classList.remove('active');
-    }
-  };
-
-  document.addEventListener('click', handleOutsideClick);
-  document.addEventListener('touchstart', handleOutsideClick);
-
-  // Update volume and icon on slider change (works for both mouse and touch)
-  const handleSliderChange = (e) => {
-    const vol = parseFloat(e.target.value);
-    bgMusic.volume = vol;
-    if (vol === 0) {
       bgMusic.muted = true;
       volumeIcon.classList.remove('fa-volume-up');
       volumeIcon.classList.add('fa-volume-mute');
       volumeIcon.classList.remove('active');
-    } else {
-      bgMusic.muted = false;
-      volumeIcon.classList.remove('fa-volume-mute');
-      volumeIcon.classList.add('fa-volume-up');
-      volumeIcon.classList.add('active');
     }
   };
 
-  volumeSlider.addEventListener('input', handleSliderChange);
-  volumeSlider.addEventListener('change', handleSliderChange);
+  volumeIcon.addEventListener('click', toggleMute);
+  volumeIcon.addEventListener('touchstart', toggleMute);
 } 
